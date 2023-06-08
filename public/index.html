@@ -2,23 +2,55 @@
 <html>
 <head>
     <title>Chatbot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"></meta>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    ></meta>
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous"
+    ></link>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
 <body>
     <h1>Welcome to the Chatbot!</h1>
-    <input id="input" type="text" placeholder="Type something..." />
+
+    <input
+        id="input"
+        type="text"
+        placeholder="入力してください"
+    ></input>
+
     <button id="submit">Submit</button>
+
     <p id="response"></p>
 
     <script>
-    $(document).ready(function() {
-        $("#submit").click(function() {
-            var prompt = $("#input").val();
-            $.post("/chat", { prompt: prompt, maxTokens: 50 }, function(data) {
-                $("#response").text(data);
-            });
-        });
+        //URLが/chatでpost送信 inputの値を送信
+$('#submit').click(function() {
+    
+    $.ajax({
+        url: '/chat',
+        method: 'POST',
+        contentType: 'text/plain',
+        data: $('#input').val(),
+    }).done(function(data) {
+        // post送信
+        $('#response').text(data);
     });
+});
     </script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+    ></script>
 </body>
 </html>
