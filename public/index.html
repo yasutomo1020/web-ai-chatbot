@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Welcome to the Chatbot!</h1>
+    <input id="input" type="text" placeholder="Type something..." />
+    <button id="submit">Submit</button>
+    <p id="response"></p>
+
+    <script>
+    $(document).ready(function() {
+        $("#submit").click(function() {
+            var prompt = $("#input").val();
+            $.post("/chat", { prompt: prompt, maxTokens: 50 }, function(data) {
+                $("#response").text(data);
+            });
+        });
+    });
+    </script>
+</body>
+</html>

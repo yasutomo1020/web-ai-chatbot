@@ -1,0 +1,21 @@
+{
+  "name": "gpt-chatbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yasutomo1020/gpt-chatbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yasutomo1020/gpt-chatbot/issues"
+  },
+  "homepage": "https://github.com/yasutomo1020/gpt-chatbot#readme"
+}
