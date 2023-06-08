@@ -39,6 +39,10 @@ app.post('/chat', async (req, res) => {
     });
     console.log(response.data.choices[0].message?.content);
     res.send(response.data.choices[0].message?.content);
+}, (error) => {
+    console.log(error);
+
+
     //  stop: null,
     //   temperature: 0.7
 });
