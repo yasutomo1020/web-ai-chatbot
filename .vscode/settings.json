@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/1597bbe3-883d-4941-b419-3b5453dcd92b/resourceGroups/web/providers/Microsoft.Web/sites/chatbot-akyt",
+    "appService.deploySubpath": "public"
+}
