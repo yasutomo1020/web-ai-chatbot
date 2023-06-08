@@ -27,25 +27,41 @@ console.log(process.env.OPENAI_API_KEY);
 
 // 初期化
 const openai = new OpenAIApi(configuration);
-//const response = await openai.listEngines();
+const sessions = {};
 
-// クライアントからのリクエストを受け取り、OpenAIのAPIを利用して応答を返します。
 app.post('/chat', async (req, res) => {
-    const content = req.body;
-    console.log(content);
+    // ユーザーのセッションIDを取得します。セッションIDはクライアントから送られてくるものとします。
+    const sessionId = req.headers['x-session-id'];
+    // ユーザーのメッセージを取得します。
+    const userMessage = req.body;
+    console.log('セッションID：' + sessionId);
+    console.log('ユーザーメッセージ：' + userMessage);
+
+    // 以前のメッセージの履歴を取得します。
+    let history = sessions[sessionId];
+    console.log(history);
+    if (!history) {
+        history = [];
+        sessions[sessionId] = history;
+    }
+
+    // ユーザーのメッセージを履歴に追加します。
+    history.push({ role: ChatCompletionRequestMessageRoleEnum.User, content: userMessage });
+
     const response = await openai.createChatCompletion({
-        model: "gpt-4",
-        messages: [{ role: ChatCompletionRequestMessageRoleEnum.User, content }],
+        model: "gpt-3.5-turbo",
+        messages: history,
     });
+
+    // AIの応答を履歴に追加します。
+    history.push({ role: ChatCompletionRequestMessageRoleEnum.System, content: response.data.choices[0].message?.content });
+
     console.log(response.data.choices[0].message?.content);
     res.send(response.data.choices[0].message?.content);
 }, (error) => {
     console.log(error);
-
-
-    //  stop: null,
-    //   temperature: 0.7
 });
+
 
 // 静的ファイル（この場合はHTML）を提供するための設定です。
 app.use(express.static('public'));

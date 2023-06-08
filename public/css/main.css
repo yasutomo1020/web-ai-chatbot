@@ -14,7 +14,7 @@
     /* スピナーを画面に固定 */
     top: 50%;
     /* 上から50%の位置に配置 */
-    left: 40%;
+    left: 35%;
     /* 左から50%の位置sに配置 */
     transform: translate(-50%, -50%);
     /* 自身のサイズの半分だけ左上にずらす（中心に配置） */
@@ -40,4 +40,25 @@
     100% {
         transform: rotate(360deg);
     }
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100svh;
+    margin: 0;
+    padding-top: 5rem;
+}
+
+#chatLog {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#inputArea {
+    flex-shrink: 0;
+}
+
+footer {
+    margin-top: auto;
 }
