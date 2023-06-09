@@ -23,7 +23,9 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-              node -v 
+              node -v
+              npm install openai
+              npm install express 
               node server.js
 
       - name: Upload artifact for deployment job
