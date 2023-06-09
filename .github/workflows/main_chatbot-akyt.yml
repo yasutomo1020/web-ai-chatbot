@@ -25,7 +25,8 @@ jobs:
         run: |
               node -v
               npm install openai
-              npm install express 
+              npm install express
+              npm install body-parser 
               node server.js
 
       - name: Upload artifact for deployment job
