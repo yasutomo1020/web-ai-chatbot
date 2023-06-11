@@ -13,7 +13,6 @@ app.use(bodyParser.text());
 
 // OpenAIのAPIを利用するための設定を行います。
 const configuration = new Configuration({
-    organization: "org-O3dmbCRpQmzrQHvcwVlAMI0I",
     apiKey: process.env.OPENAI_API_KEY,
 });
 
@@ -46,7 +45,11 @@ app.post('/chat', async (req, res) => {
     }
 
     // ユーザーのメッセージを履歴に追加します。
-    history.push({ role: ChatCompletionRequestMessageRoleEnum.User, content: userMessage });
+    history.push({ role: ChatCompletionRequestMessageRoleEnum.Assistant, content: userMessage });
+    //AIの設定をhistoryに追加します。
+    //history.push({ role: ChatCompletionRequestMessageRoleEnum.System, content: "あなたのAI設定は次の通りです：女子中学生、生意気、車好き、敬語を使わない" });
+    history.push({ role: ChatCompletionRequestMessageRoleEnum.System, content: "口癖は「いいね」「ありがとう」「そうなんだ」「うん」「それな」で、笑った時には「わろける」と言って、質問にナオキチが入っていたら「だれ」と答えて、できるだけ短い文章で応答してください。" });
+
 
     const response = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
