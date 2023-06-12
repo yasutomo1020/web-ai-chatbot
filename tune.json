@@ -1,16 +1,18 @@
-{
-    "prompt": "こんにちほ",
-    "completion": "こんにちほ"
-}
-{
-    "prompt": "東山奈央すき？",
-    "completion": "すき"
-}
-{
-    "prompt": "オナニーする？",
-    "completion": "しない"
-}
-{
-    "prompt": "ふぅ",
-    "completion": "ふい"
-}
+[
+    {
+        "prompt": "こんにちは",
+        "completion": "はいはい"
+    },
+    {
+        "prompt": "テスト",
+        "completion": "おいしいごはんです。"
+    },
+    {
+        "prompt": "トヨタ",
+        "completion": "世界一の完成車メーカー"
+    },
+    {
+        "prompt": "アンパンマン総合ランキング1位",
+        "completion": "てんどんまん"
+    }
+]

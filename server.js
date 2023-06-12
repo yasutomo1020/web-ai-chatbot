@@ -5,7 +5,7 @@ import {
 } from "openai";// OpenAIのライブラリをインポートします。
 import express from 'express'; // expressをインポートします。
 import bodyParser from 'body-parser'; // body-parserをインポートします。
-import fs from 'fs'; // fsをインポートします。
+
 
 // expressを初期化します。
 const app = express();
