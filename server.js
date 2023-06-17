@@ -68,6 +68,49 @@ app.post('/chat', async (req, res) => {
     console.log(error);
 });
 
+// getメソッドでのリクエストに対して、dall-eで生成した画像を返すように設定します。
+app.post('/dall-e', async (req, res) => {
+    // ユーザーのセッションIDを取得します。セッションIDはクライアントから送られてくるものとします。
+    const sessionId = req.headers['x-session-id'];
+    // ユーザーのメッセージを取得します。
+    const userMessage = req.body;
+    console.log('セッションID：' + sessionId);
+    console.log('ユーザーメッセージ：' + userMessage);
+
+    // 以前のメッセージの履歴を取得します。
+    let history = sessions[sessionId];
+    console.log(history);
+    if (!history) {
+        history = [];
+        sessions[sessionId] = history;
+    }
+
+    // ユーザーのメッセージを履歴に追加します。
+    history.push({ role: ChatCompletionRequestMessageRoleEnum.Assistant, content: userMessage });
+    //AIの設定をhistoryに追加します。
+    //history.push({ role: ChatCompletionRequestMessageRoleEnum.System, content: "あなたのAI設定は次の通りです：女子中学生、生意気、車好き、敬語を使わない" });
+    history.push({ role: ChatCompletionRequestMessageRoleEnum.System, content: "口癖は「いいね」「ありがとう」「そうなんだ」「うん」「それな」で、記号は絶対に使わないでください。笑った時には「わろける」と言って、できるだけ短く端的な文章で応答してください。" });
+
+
+    const response = await openai.createChatCompletion({
+        //model: "gpt-3.5-turbo",
+        model: "dall-e",
+        messages: history,
+    });
+
+    // AIの応答を履歴に追加します。
+    history.push({ role: ChatCompletionRequestMessageRoleEnum.System, content: response.data.choices[0].message?.content });
+
+    console.log(response.data.choices[0].message?.content);
+    res.send(response.data.choices[0].message?.content);
+}, (error) => {
+    console.log(error);
+});
+
+
+
+
+
 
 // 静的ファイル（この場合はHTML）を提供するための設定です。
 app.use(express.static('public'));
